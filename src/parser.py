@@ -23,7 +23,7 @@ def parse_file_path(p: str) -> (str, str, str):
 	file_contents = contents[-1]
 
 	file_type = file_contents.split('.')[-1]
-	track 	  = file_contents.split('.')[0][:-1]
+	track 	  = file_contents.split('.')[0].rstrip()
 
 	if file_type != "flac":
 		raise FileTypeError("Invalid file type. Acceptable files: .flac")
@@ -42,7 +42,7 @@ def parse_file_path(p: str) -> (str, str, str):
 
 			if _year > 9999:
 				year = None
-		except:
+		except ValueError:
 			year = None
 	else:
 		album = album[0]
