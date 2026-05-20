@@ -1,4 +1,5 @@
 from src.parser import parse_file_path, FileTypeError
+import pytest
 
 def test_get_year_from_path():
 	year, _, _ = parse_file_path(".../.../something/[2015] Manual/Benzin .flac")
