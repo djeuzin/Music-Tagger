@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Music-Tagger - Upload e Edição de Tags">
+    <title>Music-Tagger</title>
+    <link rel="icon" href="templates/image/boombox.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="bootstrap.min.css">
+</head>
+
+<body>
+    <header>
+        <div class="cover-container text-center w-100 d-flex p-3 mx-auto flex-column">
+            <h3 class="float-md-start mb-0">Music-Tagger</h3>
+        </div>
+
+        <div>
+            <div class="mb-5">
+                <div class="p-5 text-center bg-body-tertiary">
+                    <div class="container py-5">
+                        <h1 class="text-body-emphasis">Identifique suas Músicas</h1>
+                        <p class="col-lg-8 mx-auto lead">
+                            Faça o upload do seu arquivo de áudio abaixo. Nosso sistema identificará as informações e
+                            liberará a edição das tags automaticamente.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="container marketing mb-5">
+            <div id="mainRow" class="row g-5 justify-content-center">
+
+                <div id="uploadContainer" class="col-md-6">
+                    <div class="card shadow-sm border-primary mb-4">
+                        <div class="card-header bg-primary text-white py-3">
+                            <h5 class="card-title mb-0">1. Selecione o Arquivo</h5>
+                        </div>
+                        <div class="card-body py-4">
+                            <form id="uploadForm" enctype="multipart/form-data">
+                                <div class="mb-3">
+                                    <label for="musicFile" class="form-label fw-semibold">Arquivo de áudio (.mp3, .wav,
+                                        etc)</label>
+                                    <input class="form-control" type="file" id="musicFile" accept="audio/*" required="">
+                                </div>
+                                <button type="submit" id="btnSubmit" class="btn btn-primary w-100 py-2 fw-bold">
+                                    Enviar e Analisar Música
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div id="albumPreviewContainer" class="card shadow-sm text-center bg-body-tertiary p-3 d-none">
+                        <div class="d-flex justify-content-center mb-2">
+                            <img id="albumCoverImg" src="" alt="Capa do Álbum"
+                                class="img-fluid rounded shadow-sm d-none"
+                                style="max-height: 250px; object-fit: cover;">
+
+                            <div id="albumCoverPlaceholder"
+                                class="bg-secondary text-white rounded d-flex align-items-center justify-content-center shadow-sm"
+                                style="width: 250px; height: 250px;">
+                                <span>Sem imagem</span>
+                            </div>
+                        </div>
+                        <div class="mt-2 px-3">
+                            <label for="coverInput" class="form-label small text-primary fw-bold"
+                                style="cursor: pointer;">Alterar capa do álbum</label>
+                            <input type="file" id="coverInput" accept="image/*" class="d-none">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="formContainer" class="col-md-7 d-none">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-dark text-white py-3">
+                            <h5 class="card-title mb-0">2. Informações da Música (Editável)</h5>
+                        </div>
+                        <div class="card-body">
+                            <form id="metadataForm">
+
+                                <h6 class="text-primary border-bottom pb-2 mb-3 fw-bold text-uppercase">Dados da Música
+                                </h6>
+                                <div class="row g-3 mb-4">
+                                    <div class="col-12">
+                                        <label for="trackTitle" class="form-label">Título da Faixa</label>
+                                        <input type="text" class="form-control" id="trackTitle" required="">
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <label for="artist" class="form-label">Artista / Banda</label>
+                                        <input type="text" class="form-control" id="artist" required="">
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="trackNumber" class="form-label">Nº da Faixa</label>
+                                        <input type="number" class="form-control" id="trackNumber">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="genre" class="form-label">Gênero</label>
+                                        <input type="text" class="form-control" id="genre">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="duration" class="form-label">Duração</label>
+                                        <input type="text" class="form-control" id="duration" readonly="">
+                                    </div>
+                                </div>
+
+                                <h6 class="text-primary border-bottom pb-2 mb-3 fw-bold text-uppercase">Dados do Álbum
+                                </h6>
+                                <div class="row g-3 mb-4">
+                                    <div class="col-12">
+                                        <label for="albumName" class="form-label">Nome do Álbum</label>
+                                        <input type="text" class="form-control" id="albumName">
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <label for="albumArtist" class="form-label">Artista do Álbum</label>
+                                        <input type="text" class="form-control" id="albumArtist">
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <label for="releaseYear" class="form-label">Ano de Lançamento</label>
+                                        <input type="number" class="form-control" id="releaseYear">
+                                    </div>
+                                </div>
+
+                                <hr class="my-4">
+
+                                <button type="submit" class="btn btn-success btn-lg w-100 fw-bold">
+                                    Gravar Tags
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="mt-auto d-flex justify-content-center text-white-50 py-3 bg-dark">
+        <p class="mb-0">Desenvolvido pelos alunos de <a href="#" class="text-white">Validação e Verificação de
+                Software</a></p>
+    </footer>
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', function (e) {
+            e.preventDefault(); // Impede a página de recarregar
+
+            const btnSubmit = document.getElementById('btnSubmit');
+            btnSubmit.innerHTML = 'Processando áudio...';
+            btnSubmit.disabled = true;
+
+            // Simulando a resposta do backend após 1.5 segundos
+            setTimeout(() => {
+                const dadosFicticiosDoBackend = {
+                    titulo: "Blinding Lights",
+                    artista: "The Weeknd",
+                    numeroFaixa: 9,
+                    genero: "Synth-pop",
+                    duracao: "03:20",
+                    album: "After Hours",
+                    artistaAlbum: "The Weeknd",
+                    ano: 2020,
+                    capaUrl: "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?w=250&auto=format&fit=crop"
+                };
+
+                exibirEPreencherFormulario(dadosFicticiosDoBackend);
+            }, 1500);
+        });
+
+        function exibirEPreencherFormulario(dados) {
+            //Coloca os valores textuais nos inputs do formulário
+            document.getElementById('trackTitle').value = dados.titulo;
+            document.getElementById('artist').value = dados.artista;
+            document.getElementById('trackNumber').value = dados.numeroFaixa;
+            document.getElementById('genre').value = dados.genero;
+            document.getElementById('duration').value = dados.duracao;
+            document.getElementById('albumName').value = dados.album;
+            document.getElementById('albumArtist').value = dados.artistaAlbum;
+            document.getElementById('releaseYear').value = dados.ano;
+
+            //Parte da imagem da Capa do Álbum
+            const imgEl = document.getElementById('albumCoverImg');
+            const placeholderEl = document.getElementById('albumCoverPlaceholder');
+
+            if (dados.capaUrl) {
+                imgEl.src = dados.capaUrl;
+                imgEl.classList.remove('d-none');
+                placeholderEl.classList.add('d-none');
+            } else {
+                imgEl.classList.add('d-none');
+                placeholderEl.classList.remove('d-none');
+            }
+
+            // Muda classes para exibir o formulário lado a lado
+            document.getElementById('uploadContainer').className = "col-md-5"; // Reduz o tamanho do upload
+            document.getElementById('albumPreviewContainer').classList.remove('d-none'); // Revela a capa
+            document.getElementById('formContainer').classList.remove('d-none'); // Revela o formulário
+
+            // Modifica o estado do botão
+            const btnSubmit = document.getElementById('btnSubmit');
+            btnSubmit.innerHTML = 'Arquivo Processado';
+            btnSubmit.disabled = false;
+            btnSubmit.className = "btn btn-outline-success w-100 py-2 fw-bold";
+        }
+
+        // Evento para quando o usuário clicar em "Alterar capa do álbum" e selecionar uma imagem local
+        document.getElementById('coverInput').addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    const imgEl = document.getElementById('albumCoverImg');
+                    const placeholderEl = document.getElementById('albumCoverPlaceholder');
+
+                    imgEl.src = event.target.result;
+                    imgEl.classList.remove('d-none');
+                    placeholderEl.classList.add('d-none');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+
+</html>
