@@ -20,7 +20,7 @@ No diretório `Music-Tagger` inicie o ambiente virtual e instale as dependência
 - **Edição de Tags**: Interface amigável para alterar títulos, artistas, álbuns e anos.
 - **Salvar/Exportação**: Atualização dos metadados no arquivo ou banco de dados.
 
-## 🚀 Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 - **Backend**: Python (Flask) + biblioteca `musicbrainzngs`
 - **Frontend**: HTML5, CSS3, JavaScript 
